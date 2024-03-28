@@ -1,0 +1,129 @@
+#include "Cvijet.h"
+
+
+Cvijet::Cvijet(sf::RenderWindow *window)
+{
+	this->window = window;
+}
+
+void Cvijet::draw_grass()
+{
+    /*TODO - make some grass*/
+    sf::Texture grassTexture;
+}
+
+void Cvijet::draw_sun(float time)
+{
+    // Create the big Sun
+    sf::CircleShape sun(60); 
+    sun.setFillColor(sf::Color(255, 255, 0)); // make it yellow
+    sun.setPosition(20, 20);
+
+    // Create some rays behind the sun, make it shine
+    sf::RectangleShape square(sf::Vector2f(100, 100));
+    square.setFillColor(sf::Color(255, 165, 0)); // rays are orange
+    square.setOrigin(50, 50); 
+    square.setPosition(80, 80);
+
+    // Creating the squre rotation for the rays to shine bright
+    float rotationSpeed = 15.0f; // 15 degrees per second
+    float rotationAngle = -rotationSpeed * (time / 0.9); //Clockwise orienation
+    square.setRotation(rotationAngle);
+
+    window->draw(square);
+    window->draw(sun);
+}
+
+void Cvijet::draw_flower()
+{
+
+    sf::Vector2u windowSize = window->getSize();
+    float centerX = windowSize.x / 2.0f;
+    float centerY = windowSize.y / 2.0f;
+
+    // Create shapes for flower
+    // Create shapes for flower
+    sf::CircleShape centerCircle(65); // Center circle (flower core)
+    centerCircle.setFillColor(sf::Color::Red);
+    centerCircle.setPosition(centerX - 35, centerY - 45);
+
+    // Petals
+    sf::CircleShape petal1(60); // Petal 1
+    petal1.setFillColor(sf::Color(255, 192, 203));
+    petal1.setPosition(centerX - 80, centerY - 75);
+
+    sf::CircleShape petal2(55); // Petal 2
+    petal2.setFillColor(sf::Color(255, 192, 203));
+    petal2.setPosition(centerX + 25, centerY - 95);
+
+    sf::CircleShape petal3(60); // Petal 3
+    petal3.setFillColor(sf::Color(255, 192, 203));
+    petal3.setPosition(centerX + 25, centerY - 15);
+
+    sf::CircleShape petal4(60); // Petal 4
+    petal4.setFillColor(sf::Color(255, 192, 203));
+    petal4.setPosition(centerX - 75, centerY - 5);
+
+    // Stem
+    sf::RectangleShape stem(sf::Vector2f(10, 150)); // Stem
+    stem.setFillColor(sf::Color(34, 139, 34)); // Dark green color
+    stem.setPosition(centerX + 30, centerY + 60);
+
+    /*
+    sf::ConvexShape leaf1; // Leaf 1
+    leaf1.setPointCount(4);
+    leaf1.setFillColor(sf::Color(34, 139, 34)); // Dark green color
+    leaf1.setPoint(0, sf::Vector2f(centerX - 5, centerY + 150));
+    leaf1.setPoint(1, sf::Vector2f(centerX + 30, centerY + 180));
+    leaf1.setPoint(2, sf::Vector2f(centerX + 80, centerY + 130));
+    leaf1.setPoint(3, sf::Vector2f(centerX + 30, centerY + 110));
+
+    */
+
+    // Leaves
+    sf::ConvexShape leaf1; // Leaf 1
+    leaf1.setPointCount(4);
+    leaf1.setFillColor(sf::Color(34, 139, 34)); // Dark green color
+    leaf1.setPoint(0, sf::Vector2f(centerX + 35, centerY + 160));
+    leaf1.setPoint(1, sf::Vector2f(centerX + 60, centerY + 190));
+    leaf1.setPoint(2, sf::Vector2f(centerX + 110, centerY + 140));
+    leaf1.setPoint(3, sf::Vector2f(centerX + 60, centerY + 120));
+
+    sf::ConvexShape leaf2; // Leaf 2
+    leaf2.setPointCount(4);
+    leaf2.setFillColor(sf::Color(34, 139, 34)); // Dark green color
+    leaf2.setPoint(0, sf::Vector2f(centerX + 35, centerY + 160));
+    leaf2.setPoint(1, sf::Vector2f(centerX + 10, centerY + 190));
+    leaf2.setPoint(2, sf::Vector2f(centerX - 40, centerY + 140));
+    leaf2.setPoint(3, sf::Vector2f(centerX + 10, centerY + 120));
+
+    sf::ConvexShape leaf3; // Leaf 3
+    leaf3.setPointCount(4);
+    leaf3.setFillColor(sf::Color(34, 139, 34)); // Dark green color
+    leaf3.setPoint(0, sf::Vector2f(centerX + 35, centerY + 160));
+    leaf3.setPoint(1, sf::Vector2f(centerX + 60, centerY + 190));
+    leaf3.setPoint(2, sf::Vector2f(centerX + 110, centerY + 140));
+    leaf3.setPoint(3, sf::Vector2f(centerX + 60, centerY + 120));
+    leaf3.setRotation(180);
+
+    sf::ConvexShape leaf4; // Leaf 4
+    leaf4.setPointCount(4);
+    leaf4.setFillColor(sf::Color(34, 139, 34)); // Dark green color
+    leaf4.setPoint(0, sf::Vector2f(centerX + 35, centerY + 160));
+    leaf4.setPoint(1, sf::Vector2f(centerX + 10, centerY + 190));
+    leaf4.setPoint(2, sf::Vector2f(centerX - 40, centerY + 140));
+    leaf4.setPoint(3, sf::Vector2f(centerX + 10, centerY + 120));
+    leaf4.setRotation(180);
+
+    // Draw shapes
+    window->draw(stem);
+    window->draw(petal1);
+    window->draw(petal2);
+    window->draw(petal3);
+    window->draw(petal4);
+    window->draw(centerCircle);
+    window->draw(leaf1);
+    window->draw(leaf2);
+    window->draw(leaf3);
+    window->draw(leaf4);
+}
