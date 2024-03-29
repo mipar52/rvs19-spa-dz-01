@@ -10,7 +10,7 @@ private:
 public:
 	Cvijet(sf::RenderWindow *window);
 	void draw_flower();
-	void draw_grass();
 	void draw_sun(float time);
+	void draw_grass();
 };
 

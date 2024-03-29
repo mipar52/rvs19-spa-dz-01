@@ -6,12 +6,6 @@ Cvijet::Cvijet(sf::RenderWindow *window)
 	this->window = window;
 }
 
-void Cvijet::draw_grass()
-{
-    /*TODO - make some grass*/
-    sf::Texture grassTexture;
-}
-
 void Cvijet::draw_sun(float time)
 {
     // Create the big Sun
@@ -25,7 +19,7 @@ void Cvijet::draw_sun(float time)
     square.setOrigin(50, 50); 
     square.setPosition(80, 80);
 
-    // Creating the squre rotation for the rays to shine bright
+    // Creating the squre rotation for the rays to shine bright, but really fast
     float rotationSpeed = 15.0f; // 15 degrees per second
     float rotationAngle = -rotationSpeed * (time / 0.9); //Clockwise orienation
     square.setRotation(rotationAngle);
@@ -41,7 +35,6 @@ void Cvijet::draw_flower()
     float centerX = windowSize.x / 2.0f;
     float centerY = windowSize.y / 2.0f;
 
-    // Create shapes for flower
     // Create shapes for flower
     sf::CircleShape centerCircle(65); // Center circle (flower core)
     centerCircle.setFillColor(sf::Color::Red);
@@ -65,20 +58,9 @@ void Cvijet::draw_flower()
     petal4.setPosition(centerX - 75, centerY - 5);
 
     // Stem
-    sf::RectangleShape stem(sf::Vector2f(10, 150)); // Stem
+    sf::RectangleShape stem(sf::Vector2f(10, 150));
     stem.setFillColor(sf::Color(34, 139, 34)); // Dark green color
     stem.setPosition(centerX + 30, centerY + 60);
-
-    /*
-    sf::ConvexShape leaf1; // Leaf 1
-    leaf1.setPointCount(4);
-    leaf1.setFillColor(sf::Color(34, 139, 34)); // Dark green color
-    leaf1.setPoint(0, sf::Vector2f(centerX - 5, centerY + 150));
-    leaf1.setPoint(1, sf::Vector2f(centerX + 30, centerY + 180));
-    leaf1.setPoint(2, sf::Vector2f(centerX + 80, centerY + 130));
-    leaf1.setPoint(3, sf::Vector2f(centerX + 30, centerY + 110));
-
-    */
 
     // Leaves
     sf::ConvexShape leaf1; // Leaf 1
@@ -126,4 +108,38 @@ void Cvijet::draw_flower()
     window->draw(leaf2);
     window->draw(leaf3);
     window->draw(leaf4);
+}
+
+void Cvijet::draw_grass()
+{
+    // 50 shades of grass :D
+    const int numBlades = 50;
+
+    // The grass are the lines
+    sf::VertexArray grass(sf::Lines);
+
+    // The grass will go up and down, max and min values
+    float minHeight = 100.0f;
+    float maxHeight = 150.0f;
+
+    // Grass line width
+    float bladeWidth = window->getSize().x / numBlades;
+
+    // Populate the vertex array with grass blades
+    for (int i = 0; i < numBlades; ++i)
+    {
+        // how the grass will grow and shrink in random
+        float height = minHeight + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (maxHeight - minHeight)));
+
+        // Calculate positions
+        sf::Vector2f point1(i * bladeWidth, window->getSize().y);
+        sf::Vector2f point2((i + 0.5f) * bladeWidth, window->getSize().y - height);
+
+        // Add points to the vertex array
+        grass.append(sf::Vertex(point1, sf::Color::Green));
+        grass.append(sf::Vertex(point2, sf::Color::Green));
+    }
+
+    // Make it happen with the grass
+    window->draw(grass);
 }

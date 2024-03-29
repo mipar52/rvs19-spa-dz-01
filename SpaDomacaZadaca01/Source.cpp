@@ -24,6 +24,7 @@ int main()
 		window.clear();
 		cvijet.draw_flower();
 		cvijet.draw_sun(deltaTime);
+		cvijet.draw_grass();
 		window.display();
 	}
 
