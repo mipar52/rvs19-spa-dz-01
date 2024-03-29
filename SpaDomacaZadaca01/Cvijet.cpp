@@ -5,7 +5,7 @@ Cvijet::Cvijet(sf::RenderWindow *window)
 {
 	this->window = window;
 }
-
+/* The super fast sun */
 void Cvijet::draw_sun(float time)
 {
     // Create the big Sun
@@ -20,14 +20,14 @@ void Cvijet::draw_sun(float time)
     square.setPosition(80, 80);
 
     // Creating the squre rotation for the rays to shine bright, but really fast
-    float rotationSpeed = 15.0f; // 15 degrees per second
+    float rotationSpeed = 15.0f; // 15 degrees per rotation
     float rotationAngle = -rotationSpeed * (time / 0.9); //Clockwise orienation
     square.setRotation(rotationAngle);
 
     window->draw(square);
     window->draw(sun);
 }
-
+/* Making that pretty flower */
 void Cvijet::draw_flower()
 {
 
@@ -109,23 +109,23 @@ void Cvijet::draw_flower()
     window->draw(leaf3);
     window->draw(leaf4);
 }
-
+/* Make that beautiful green grass */
 void Cvijet::draw_grass()
 {
-    // 50 shades of grass :D
-    const int numBlades = 50;
+    // 50 lines of grass :D
+    const int numBlades = 100;
 
     // The grass are the lines
     sf::VertexArray grass(sf::Lines);
 
     // The grass will go up and down, max and min values
-    float minHeight = 100.0f;
-    float maxHeight = 150.0f;
+    float minHeight = 50.0f;
+    float maxHeight = 100.0f;
 
     // Grass line width
     float bladeWidth = window->getSize().x / numBlades;
 
-    // Populate the vertex array with grass blades
+    // One forinjo, populate the vertex array with grass blades
     for (int i = 0; i < numBlades; ++i)
     {
         // how the grass will grow and shrink in random

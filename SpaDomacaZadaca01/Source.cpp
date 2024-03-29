@@ -11,7 +11,8 @@ int main()
 	sf::Time elapsed;
 	while (window.isOpen())
 	{
-		elapsed = clock.restart(); // Restart clock and get elapsed time
+		// setting the clock for the sun animation
+		elapsed = clock.restart();
 		deltaTime = elapsed.asMilliseconds() * 500;
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -22,9 +23,9 @@ int main()
 		}
 
 		window.clear();
+		cvijet.draw_grass();
 		cvijet.draw_flower();
 		cvijet.draw_sun(deltaTime);
-		cvijet.draw_grass();
 		window.display();
 	}
 
